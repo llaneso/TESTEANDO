@@ -1,34 +1,49 @@
 async function buscarJugador() {
-    const input = document.getElementById("player").value;
+    const nombre = document.getElementById("playerName").value.trim();
+    const tag = document.getElementById("playerTag").value.trim();
 
-    // Separar nombre y tag
-    const [nombre, tag] = input.split("#");
-
-    // URL de la API (Tracker Network)
-    const url = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/${nombre}%23${tag}`;
-
-    try {
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-
-        mostrarStats(data);
-    } catch (error) {
-        console.error("Error al obtener datos:", error);
-        document.getElementById("stats").innerHTML = "<p>Error al buscar jugador.</p>";
+    if (nombre !== "Frixuelos" || tag !== "G59") {
+        document.getElementById("stats").innerHTML = "<p>Jugador no encontrado.</p>";
+        return;
     }
-}
-function mostrarStats(data) {
-    const stats = data.data.segments[0].stats;
 
-    const jugadas = stats.matchesPlayed.value;
-    const ganadas = stats.matchesWon.value;
-    const perdidas = stats.matchesLost.value;
-    const kda = stats.kDARatio.value;
+    // Datos falsos
+    const dataFalsa = {
+        username: "Frixuelos",
+        tag: "G59",
+        matchesPlayed: 120,
+        matchesWon: 119,
+        matchesLost: 1,
+        kda: 3.43
+    };
 
-    document.getElementById("stats").innerHTML = `
-        <p>Partidas jugadas: ${jugadas}</p>
-        <p>Partidas ganadas: ${ganadas}</p>
-        <p>Partidas perdidas: ${perdidas}</p>
-        <p>KDA: ${kda}</p>
-    `;
+    mostrarStats(dataFalsa);
 }
+    // Aqui pongo la funcion que muestra los datos en la página
+    function mostrarStats(stats) {
+        document.getElementById("stats").innerHTML = `
+           <div class="stats-card">
+            <div class="stats-title">${stats.username}#${stats.tag}</div>
+
+            <div class="stat-line">
+                <img src="https://cdn-icons-png.flaticon.com/512/32/32177.png">
+                Partidas jugadas: <strong>${stats.matchesPlayed}</strong>
+            </div>
+
+            <div class="stat-line">
+                <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+                Ganadas: <strong>${stats.matchesWon}</strong>
+            </div>
+
+            <div class="stat-line">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png">
+                Perdidas: <strong>${stats.matchesLost}</strong>
+            </div>
+
+            <div class="stat-line">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
+                KDA: <strong>${stats.kda}</strong>
+            </div>
+        </div> 
+        `;
+    }

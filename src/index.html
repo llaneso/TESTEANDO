@@ -6,18 +6,30 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-<div class="search-container">
-    <h1 class="titulo-valorant">BUSCAR ESTADÍSTICAS DE VALORANT</h1>
-</div>
-<div class="search-container">
-    <input id="player" placeholder="Nombre#Tag">
-    <button onclick="buscarJugador()">Buscar</button>
-<div id="stats">
-</div>
-</div>
-</h1>
-</div>
-<script src="../js/script.js">
-</script>
+
+    <div class="titulo-container">
+        <h1 class="titulo-valorant">BUSCAR ESTADÍSTICAS DE VALORANT</h1>
+    </div>
+
+    <div class="search-container">
+
+        <div class="input-wrapper">
+            <input id="playerName" placeholder="Nombre">
+        </div>
+
+        <span class="tag-separator">#</span>
+
+        <div class="input-wrapper tag-box">
+            <input id="playerTag" placeholder="Tag" maxlength="5">
+        </div>
+
+        <button onclick="buscarJugador()">Buscar</button>
+    </div>
+
+    <div id="stats"></div>
+
+    <script src="../js/script.js"></script>
 </body>
 </html>
+
+
